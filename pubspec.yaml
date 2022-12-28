@@ -40,6 +40,13 @@ dependencies:
   cached_network_image: ^3.2.3
   expandable_text: ^2.3.0
   quiver: ^3.2.1
+  photo_manager: ^2.5.2
+  firebase_core: ^2.4.0
+  firebase_auth: ^4.2.3
+  google_sign_in: ^5.4.2
+  cloud_firestore: ^4.3.0
+  image_picker: ^0.8.6
+  firebase_storage: ^11.0.9
 
 dev_dependencies:
   flutter_test:

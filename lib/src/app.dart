@@ -4,6 +4,8 @@ import 'package:insta_clone_app/src/components/image_data.dart';
 import 'package:insta_clone_app/src/controller/bottom_nav_controller.dart';
 import 'package:insta_clone_app/src/pages/home.dart';
 
+import 'pages/active_history.dart';
+import 'pages/mypage.dart';
 import 'pages/search.dart';
 
 class App extends GetView<BottomNavController> {
@@ -19,16 +21,17 @@ class App extends GetView<BottomNavController> {
             index: controller.pageIndex.value, // 현재 페이지 확인
             children: [
               const Home(),
-              const Search(),
-              Container(
-                child: const Center(child: Text('Upload')),
+              Navigator(
+                key: controller.searchPageNaviationKey,
+                onGenerateRoute: (settings) {
+                  return MaterialPageRoute(
+                    builder: (context) => const Search(),
+                  );
+                },
               ),
-              Container(
-                child: const Center(child: Text('Activity')),
-              ),
-              Container(
-                child: const Center(child: Text('MyPage')),
-              ),
+              Container(), // Upload부분, bottomNav index 갯수때문에 만들어둠
+              const ActiveHistory(),
+              const MyPage(),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(

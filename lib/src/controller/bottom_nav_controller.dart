@@ -10,9 +10,11 @@ import '../pages/upload.dart';
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE }
 
 class BottomNavController extends GetxController {
+  static BottomNavController get to => Get.find();
   // 현재 페이지 기본 0번
   RxInt pageIndex = 0.obs;
-
+  GlobalKey<NavigatorState> searchPageNaviationKey =
+      GlobalKey<NavigatorState>();
   List<int> bottomHistory = [0];
 
   // page 관리
@@ -60,6 +62,13 @@ class BottomNavController extends GetxController {
       );
       return true;
     } else {
+      var page = PageName.values[bottomHistory.last];
+      if (page == PageName.SEARCH) {
+        var value = await searchPageNaviationKey.currentState!
+            .maybePop(); // maybePop == pop할게 있는지 없는지 체크
+        if (value) return false;
+      }
+
       // 뒤로가기 클릭시 List에 쌓여있는 value 하나씩 제거
       bottomHistory.removeLast();
 

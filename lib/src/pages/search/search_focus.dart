@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_clone_app/src/components/image_data.dart';
 
+import '../../controller/bottom_nav_controller.dart';
+
 class SearchFocus extends StatefulWidget {
   const SearchFocus({super.key});
 
@@ -32,6 +34,29 @@ class _SearchFocusState extends State<SearchFocus>
     );
   }
 
+  Widget _body() {
+    return TabBarView(
+      controller: tabController,
+      children: const [
+        Center(
+          child: Text('인기 페이지'),
+        ),
+        Center(
+          child: Text('계정 페이지'),
+        ),
+        Center(
+          child: Text('오디오 페이지'),
+        ),
+        Center(
+          child: Text('태그 페이지'),
+        ),
+        Center(
+          child: Text('장소 페이지'),
+        ),
+      ],
+    );
+  }
+
   PreferredSizeWidget tabMenu() {
     return PreferredSize(
       preferredSize: Size.fromHeight(AppBar().preferredSize.height),
@@ -52,8 +77,8 @@ class _SearchFocusState extends State<SearchFocus>
             _tabMenuOne('인기'),
             _tabMenuOne('계정'),
             _tabMenuOne('오디오'),
-            _tabMenuOne('인기'),
-            _tabMenuOne('인기'),
+            _tabMenuOne('태그'),
+            _tabMenuOne('장소'),
           ],
         ),
       ),
@@ -67,7 +92,9 @@ class _SearchFocusState extends State<SearchFocus>
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-            Get.back;
+            // Get.back();
+            // Get.find<BottomNavController>().willPopAction();
+            BottomNavController.to.willPopAction();
           },
           child: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -92,11 +119,7 @@ class _SearchFocusState extends State<SearchFocus>
         ),
         bottom: tabMenu(),
       ),
-      body: SafeArea(
-        child: Column(
-          children: const [],
-        ),
-      ),
+      body: _body(),
     );
   }
 }
