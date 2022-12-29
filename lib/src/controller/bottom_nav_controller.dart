@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../components/message_popup.dart';
 import '../pages/upload.dart';
+import 'upload_controller.dart';
 
 // 선택된 페이지를 보기 쉽게 문자로 만듬
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE }
@@ -24,7 +25,14 @@ class BottomNavController extends GetxController {
     // bottom_nav에서 선택된 페이지로 이동
     switch (page) {
       case PageName.UPLOAD:
-        Get.to(() => const Upload());
+        Get.to(
+          () => Upload(),
+          binding: BindingsBuilder(
+            () {
+              Get.put(UploadController());
+            },
+          ),
+        );
         break;
       case PageName.HOME:
       case PageName.SEARCH:

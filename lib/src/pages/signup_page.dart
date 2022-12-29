@@ -45,8 +45,8 @@ class _SignupPageState extends State<SignupPage> {
         const SizedBox(height: 15),
         ElevatedButton(
           onPressed: () async {
-            thumbnailXFile = await _picker.pickImage(
-                source: ImageSource.gallery, imageQuality: 100);
+            thumbnailXFile =
+                await _picker.pickImage(source: ImageSource.gallery);
             update();
           },
           child: const Text('이미지 변경'),
@@ -119,7 +119,7 @@ class _SignupPageState extends State<SignupPage> {
               nickname: nicknameController.text,
               description: descriptionController.text,
             );
-            AuthController.to.signup(signupUser);
+            AuthController.to.signup(signupUser, thumbnailXFile);
           },
           child: const Text('회원가입'),
         ),
